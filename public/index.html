@@ -18,8 +18,9 @@
 
 </head>
 <body>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
         <a class="navbar-brand" href="./index.html">Grocery Delivery Application</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -27,13 +28,10 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="./index.html">Home</a>
-            </li>
             <li class="nav-item">
               <a class="nav-link" href="./items.html">Items</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="./cart.html">Cart</a>
             </li>
           </ul>
@@ -42,12 +40,23 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
-    </nav>
+    </div>
+  </nav>
 
+  <!-- Page Content -->
+  <div class="container">
     <div class="jumbotron text-center">
         <h1>Welcome to our Grocery Delivery Application!</h1>
-        <p>Feel free to peruse through our store and select items to put in your cart.</p>
+        <p>Feel free to peruse around and add items to your cart.</p>
     </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+  </footer>
 
 </body>
 </html>

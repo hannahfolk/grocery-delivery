@@ -1,3 +1,22 @@
 .body-container {
-    padding: 50px;
+  padding: 50px;
+  background-color: white;
+}
+
+.jumbotron {
+  background-color: white;
+  color: rgb(60, 130, 62);
+  margin-top: 50px;
+}
+
+a {
+  color: rgb(60, 130, 62);
+}
+
+#cart-row {
+  padding-top: 25px;
+}
+
+#item-row {
+  padding-top: 15px;
 }

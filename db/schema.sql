@@ -1,8 +1,8 @@
 DROP DATABASE IF EXISTS groceries_db;
 CREATE database groceries_db;
-​
+
 USE groceries_db;
-​
+
 CREATE TABLE groceries (
   id INT NOT NULL AUTO_INCREMENT,
   unit_name VARCHAR (80) NULL,
@@ -13,5 +13,5 @@ CREATE TABLE groceries (
   unit_image VARCHAR (120) NULL,
   PRIMARY KEY (id)
 );
-​
+
 SELECT * FROM groceries;

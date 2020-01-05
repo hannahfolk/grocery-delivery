@@ -33,71 +33,89 @@ connection.connect(err => {
 });
 
 // Use Handlebars to render the main index.html page with the items in it.
-app.get("/groceries.html", (req, res) => {
-  connection.query("SELECT * FROM groceries;", (err, data) => {
-    if (err) {
-      return res.status(500).end();
-    }
-
-    res.render("groceries", { groceries: data });
-  });
+app.get("/", function(req, res) {
+  res.render("index");
 });
 
-// Create a new grocery item
-app.post("/api/groceries", (req, res) =>{
-  connection.query("INSERT INTO groceries (name) VALUES (?)", [req.body.item], (err, result) => {
-    if (err) {
-      return res.status(500).end();
-    }
-
-    // Send back the ID of the new movie
-    res.json({ id: result.insertId });
-    console.log({ id: result.insertId });
-  });
-});
-
-// Retrieve all groceries
 app.get("/api/groceries", (req, res) => {
   connection.query("SELECT * FROM groceries;", (err, data) => {
     if (err) {
       return res.status(500).end();
     }
 
-    res.json(data);
+    res.render("items", { groceries: data });
   });
 });
 
-// Update an item
-app.put("/api/groceries/:id", (req, res) => {
-  connection.query("UPDATE groceries SET grocerie = ? WHERE id = ?", [req.body.movie, req.params.id], (err, result) => {
+app.get("/api/cart", function(req, res) {
+  connection.query("SELECT * FROM cart;", (err, data) => {
     if (err) {
-      // If an error occurred, send a generic server failure
       return res.status(500).end();
     }
-    else if (result.changedRows === 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    }
-    res.status(200).end();
-
+    res.render("cart", { cart: data });
   });
 });
 
-// Delete a grocery item
-app.delete("/api/groceries/:id", (req, res) => {
-  connection.query("DELETE FROM groceries WHERE id = ?", [req.params.id], (err, result) => {
-    if (err) {
-      // If an error occurred, send a generic server failure
-      return res.status(500).end();
+// Create a new cart item
+app.post("/api/cart", (req, res) => {
+  connection.query(
+    "INSERT INTO cart (unit_name, unit_price, unit_image) VALUES (?, ?, ?)",
+    [req.body.unit_name, req.body.unit_price, req.body.unit_image],
+    (err, res) => {
+      if (err) {
+        return res.status(500).end();
+      }
+      res.json(res);
     }
-    else if (result.affectedRows === 0) {
-      // If no rows were changed, then the ID must not exist, so 404
-      return res.status(404).end();
-    }
-    res.status(200).end();
-
-  });
+  );
 });
+
+// // Retrieve all groceries
+// app.get("/api/groceries", (req, res) => {
+//   connection.query("SELECT * FROM groceries;", (err, data) => {
+//     if (err) {
+//       return res.status(500).end();
+//     }
+
+//     res.json(data);
+//   });
+// });
+
+// // Update an item
+// app.put("/api/groceries/:id", (req, res) => {
+//   connection.query(
+//     "UPDATE groceries SET groceries = ? WHERE id = ?",
+//     [req.body.movie, req.params.id],
+//     (err, result) => {
+//       if (err) {
+//         // If an error occurred, send a generic server failure
+//         return res.status(500).end();
+//       } else if (result.changedRows === 0) {
+//         // If no rows were changed, then the ID must not exist, so 404
+//         return res.status(404).end();
+//       }
+//       res.status(200).end();
+//     }
+//   );
+// });
+
+// // Delete a grocery item
+// app.delete("/api/groceries/:id", (req, res) => {
+//   connection.query(
+//     "DELETE FROM groceries WHERE id = ?",
+//     [req.params.id],
+//     (err, result) => {
+//       if (err) {
+//         // If an error occurred, send a generic server failure
+//         return res.status(500).end();
+//       } else if (result.affectedRows === 0) {
+//         // If no rows were changed, then the ID must not exist, so 404
+//         return res.status(404).end();
+//       }
+//       res.status(200).end();
+//     }
+//   );
+// });
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, () => {
